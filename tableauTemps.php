@@ -5,7 +5,7 @@ $heuresJ = date("h");
 $minutesI = date("i");
 echo "Heure actuelle : <br>" . $heuresJ . " h " . $minutesI;
 echo "<br>";
-$color ="<span class=\"color\">XXXX</span>";
+$now ="<span class=\"color\">XXXX</span>";
 $arr = array(); 
 for($j=0; $j<12; $j++){
     $arr[] = []; 
@@ -13,12 +13,7 @@ for($j=0; $j<12; $j++){
         $arr[$i][$j] = ($j+1) . " h " . str_pad($i, 2, "0", STR_PAD_LEFT);          
     }            
 }
-for($j=0; $j<12; $j++){    
-    for($i=0; $i<60; $i++){
-        if ($i == $minutesI && $j == $heuresJ-1)
-        $arr[$i][$j] = $color;            
-    }            
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +51,11 @@ for($j=0; $j<12; $j++){
 for ($i = 0; $i < count($arr); $i++) {
     echo '<tr class="tdtrStyle">';
     for ($j = 0; $j < count($arr[$i]); $j++) {
-        echo '<td class="tdtrStyle">' .  $arr[$i][$j] . "</td>";        
+        if ($i == $minutesI && $j == $heuresJ-1) {
+            echo '<td class="tdtrStyle">' .  $now . "</td>";
+        } else {
+            echo '<td class="tdtrStyle">' .  $arr[$i][$j] . "</td>";
+        }     
     }
     echo "</tr>";
 }
